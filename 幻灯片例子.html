@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>幻灯片</title>
+    <style>
+        *{margin:0;padding:0;}
+        ul,ol,li{list-style: none;}
+        .play{width:392px;height:247px;margin:30px auto;position:relative;overflow: hidden;}
+        .play ol{position:absolute;bottom:10px;right:5px;cursor:pointer;}
+        .play ol li{float: left;color: #fff;width:20px;height:20px;border:1px solid #ff6600;background: #ff9d19;margin-left: 5px;text-align: center;cursor:pointer;}
+        .play ol li.active{color: #ff3b31;}
+        .play ul{position:absolute;top:0;width:392px;height:250px;}
+        .play ul li{margin-top:-3px;}
+    </style>
+    <script src="move2.js"></script>
+    <script>
+        window.onload = function () {
+            var oPlay = document.getElementById("play");
+            var oLi = oPlay.getElementsByTagName("ol")[0].getElementsByTagName("li");
+            var oUl = oPlay.getElementsByTagName("ul")[0];
+
+            var now = 0;
+
+            for(var i=0;i<oLi.length;i++){
+                oLi[i].index = i;
+                oLi[i].onmouseover = function () {
+                    now = this.index;
+                    tab();
+                }
+            }
+
+            function tab(){
+                for(var j=0;j<oLi.length;j++){
+                    oLi[j].className = "";
+                }
+                oLi[now].className = "active";
+                move(oUl,{top:-250*now});
+            }
+
+            function next(){
+                now++;
+                if(now == oLi.length){
+                    now = 0;
+                }
+                tab();
+            }
+
+            var timer = setInterval(next,5000);
+
+            oPlay.onmouseover = function () {
+                clearInterval(timer);
+            };
+            oPlay.onmouseout = function () {
+                timer = setInterval(next,5000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="play" id="play">
+        <ul>
+            <li><a href="javascript:void(0)"></a><img src="img/guanfang1.jpg" alt="广告一"></li><li>
+            <a href="javascript:void(0)"></a><img src="img/guanfang2.jpg" alt="广告二"></li><li>
+            <a href="javascript:void(0)"></a><img src="img/guanfang3.jpg" alt="广告三"></li><li>
+            <a href="javascript:void(0)"></a><img src="img/guanfang4.jpg" alt="广告四"></li><li>
+            <a href="javascript:void(0)"></a><img src="img/guanfang5.jpg" alt="广告五"></li>
+        </ul>
+        <ol>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ol>
+    </div>
+</body>
+</html>

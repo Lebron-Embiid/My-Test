@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定事件</title>
+    <script>
+        function myAddEvent(obj,event,fn){
+            if(obj.attachEvent){
+                obj.attachEvent("on"+event,fn);
+            }
+            else{
+                obj.addEventListener(event,fn,false);
+            }
+        }
+
+        window.onload = function () {
+            var oBtn = document.getElementById("btn1");
+            myAddEvent(oBtn,'mouseover', function () {
+                oBtn.style.background = 'red';
+                oBtn.value = "红色";
+            });
+            myAddEvent(oBtn,'mouseout',function(){
+                oBtn.style.background = '';
+                oBtn.value = "变红";
+            });
+        }
+    </script>
+</head>
+<body>
+    <input id="btn1" type="button" value="变红">
+</body>
+</html>

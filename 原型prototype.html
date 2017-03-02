@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型</title>
+    <script>
+        window.onload= function () {
+            function CreatePerson(name,qq){
+                this.name = name;
+                this.qq = qq;
+            }
+            CreatePerson.prototype.showName = function () {
+                alert("my name is "+this.name);
+            };
+            CreatePerson.prototype.showQQ = function () {
+                alert("my QQ is "+this.qq);
+            };
+            var obj = new CreatePerson("LeBron","236236236");
+            var obj2 = new CreatePerson("LeBron1","2362362361");
+            obj.showName();
+            obj.showQQ();
+            obj2.showName();
+            obj2.showQQ();
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

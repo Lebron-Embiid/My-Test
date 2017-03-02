@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义滚动条</title>
+    <style>
+        #parent{width:10px;height:380px;background:#ccc;position:relative;margin:-300px 0 0 1300px;float:right;}
+        #div1{width:10px;height:30px;background:#000;position:absolute;top:0;left:0;border-radius:20px;}
+        #div2{width:400px;height:300px;background:#ccc;position:relative;overflow: hidden;float:left;}
+        #div3{position:absolute;padding:8px;top:0;}
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv = document.getElementById("div1");
+            var oParent = document.getElementById("parent");
+            var oDiv2 = document.getElementById("div2");
+            var oDiv3 = document.getElementById("div3");
+
+            oDiv.onmousedown = function (ev) {
+                var oEvent = ev||event;
+                var disY = oEvent.clientY - oDiv.offsetTop;
+                //事件捕获 setCapture  取消事件捕获 releaseCapture
+                if(oDiv.setCapture){
+                    oDiv.onmousemove = mouseMove;
+                    oDiv.onmouseup = mouseUp;
+                    oDiv.setCapture();
+                }
+                else {
+                    document.onmousemove = mouseMove;
+                    document.onmouseup = mouseUp;
+                }
+                function mouseMove(ev) {
+                    var oEvent = ev||event;
+                    var t = oEvent.clientY - disY;
+                    if(t<0){
+                        t=0;
+                    }
+                    else if(t>oParent.offsetHeight-oDiv.offsetHeight){
+                        t=oParent.offsetHeight-oDiv.offsetHeight;
+                    }
+                    oDiv.style.top = t+"px";
+                    var scale = t/(oParent.offsetHeight-oDiv.offsetHeight);
+//                  document.title = scale;
+                    oDiv3.style.top = -scale*(oDiv3.offsetHeight-oDiv2.offsetHeight)+"px";
+                }
+                function mouseUp() {
+                    this.onmousemove = null;
+                    this.onmouseup = null;
+                    if(oDiv.releaseCapture){
+                        oDiv.releaseCapture();
+                    }
+                }
+                return false;
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="div2">
+        <div id="div3">
+            免费的在线教程&技术文档
+            编程入门教程
+            学习 HTML
+            学习 HTML5
+            学习 CSS
+            学习 CSS3
+            学习 Javascript
+            学习 正则表达式
+            编程实战训练
+            实战 HTML&CSS
+            实战 JavaScript
+            实战 Bootstrap
+            实战 jQuery
+            数据库开发教程
+            学习 SQL
+            学习 Mysql
+            学习 SQLite
+            学习 Redis
+            学习 MongoDB
+            学习 Memcached
+            学习 MyBatis
+            学习 Spark
+            学习 Hibernate
+            学习 Scala
+            学习 Slick
+            学习 Storm
+            开发框架
+            学习 Servlet
+            学习 Spring
+            学习 Swing
+            学习 Jfinal
+            学习 Revel
+            学习 Django
+            学习 Junit
+            学习资源收藏
+            前端学习资源汇总
+            微信小程序资源汇总
+            免费Jquery插件合集
+            自助建站资源汇总
+            XML教程
+            学习 XML
+            学习 DTD
+            学习 XML DOM
+            学习 XSL T
+            学习 XSL-FO
+            学习 XPath
+            学习 XQuery
+            学习 SOAP
+            学习 RSS
+            学习 Web Services
+            前端开发教程
+            学习 jQuery
+            学习 HTML DOM
+            学习 Bootstrap
+            学习 JSON
+            学习 AJAX
+            学习 ECMAScript
+            学习 AngularJS
+            学习 jQuery EasyUI
+            学习 jQuery UI
+            学习 Vue
+            学习 Meteor
+            学习 CoffeeScript
+            学习 UI设计
+            学习 前端开发规范
+            学习 初级脚本算法
+            移动端开发教程
+            学习 Swift
+            学习 IOS
+            学习 jQuery Mobile
+            学习 Android SDK
+            学习 AppCan
+            学习 CrossApp
+            学习 React
+            学习 HomeKit
+            学习 微信小程序开发
+            网站建设教程
+            学习 HTTP
+            学习 TCP/IP
+            浏览器信息
+            网站建设指南
+            网站主机
+            网站品质
+            万维网联盟（W3C）
+            常用办公软件教程
+            学习 Office技巧
+            学习 Excel
+            学习 Photoshop
+            学习 Axure
+            学习 Markdown语法
+            服务器端开发教程
+            学习 PHP
+            学习 Java
+            学习 JSP
+            学习 ASP.NET
+            学习 C
+            学习 C++
+            学习 C#
+            学习 Docker
+            学习 Go
+            学习 Lua
+            学习 Node.js
+            学习 Perl
+            学习 Python
+            学习 Python3
+            学习 Ruby
+            学习 Erlang
+            学习 Servlet
+            学习 VBscript
+            学习 Julia
+            学习 Swoole
+            运维及服务器搭建教程
+            学习 Linux
+            学习 Unix
+            学习 Docker
+            学习 Docker从入门到实践
+            学习 DOS命令
+            学习 Nginx使用手册
+            学习 Shell编程范例
+            学习 OAuth2
+            学习 Dart
+            实例/案例
+            HTML 实例
+            CSS 实例
+            XML 实例
+            JavaScript 实例
+            JavaScript 对象实例
+            HTML DOM 实例
+            XML DOM 实例
+            AJAX 实例
+            VBScript 实例
+            ASP 实例
+            ADO 实例
+            SVG 实例
+            参考手册
+            HTML 参考手册
+            CSS 参考手册
+            JavaScript 和 HTML DOM 参考手册
+            Yii 2.0 权威指南
+            ThinkPHP3.2.3完全开发手册
+            PHP开发编码规范
+            SSDB数据库使用手册
+            微信公众平台的开发者文档
+            开发工具教程
+            学习 Ant
+            学习 Atom
+            学习 Composer
+            学习 Codesmith
+            学习 Dreamweaver
+            学习 Eclipse
+            学习 Firebug
+            学习 Git
+            学习 Gradle
+            学习 Grunt
+            学习 HBuilder
+            学习 Maven
+            学习 Sublime Text
+            学习 SVN
+            学习 Vim
+            字符集
+            HTML 字符集
+            HTML ASCII
+            HTML ISO-8859-1
+            HTML 符号
+            测验/考试
+            HTML 测验
+            CSS 测验
+            XML 测验
+            JavaScript 测验
+            SQL 测验
+            ASP 测验
+            PHP 测验
+            代码验证
+            验证 HTML
+            验证 CSS
+            验证 XHTML
+            验证 XML
+            验证 WML
+            在线编程，一个IT人员的在线实验室
+
+            在这个代码实验室里，你可以使用超过80种编程语言创建、编写、执行你的程序，甚至是把它们分享到网络上，给你带来超凡的开发体验！
+            立即体验
+            在线工具库
+            代码工具
+            在线IDE编辑工具
+            JavaScript格式化整理工具
+            在线生成字体CSS样式工具
+            在线 Markdown 编译器
+            JSON在线美化工具
+            简单的在线流程工具
+            格式化美化工具
+            PHP代码在线格式化美化工具
+            SQL代码在线格式化美化工具
+            HTML/css/JS在线压缩工具
+            C语言风格/HTML/CSS/json代码格式化美化工具
+            Perl代码在线格式化美化工具
+            在线文本美化排版工具
+            站长辅助工具
+            在线Meta 标签生工具
+            在线robots.txt文件生成工具
+            在线CSV转HTML表格
+            在线去除重复项工具
+            Excel/csv数据转json格式工具
+            在线特效文字/彩色文字生成工具
+            CSS在线工具
+            在线CSS Lint(CSS代码优化)工具
+            CSS3代码生成器
+            CSS3 Text Stroke和text-fill-color调试工具
+            CSS3 border-radius(圆角)效果在线调试工具
+            CSS3 Text Shadow(文本阴影)效果在线调试工具
+            CSS3 Box Shadow(阴影)效果在线调试工具
+            编码转换工具
+            二维码在线解码工具
+            二维码在线生成工具
+            在线条形码生成工具
+            在线Unicode/中文转换工具
+            URL在线编码转换工具
+            Native/UTF-8在线编码转换工具
+            友情链接
+            在线工具 智米云 优聚 技术宅 程序猿 易百教程 思维导图 开源社区 视频制作软件 app开发 网页模版 代理ip 网站测速 51CTO学院 网站制作 office办公软件 crm ecshop模板堂 LayaBox
+            网站相关
+            关于我们
+            加入我们
+            免责声明
+            网站地图
+            内容专区
+            编程入门教程
+            开源文档
+            在线实例
+            文章存档
+            常用链接
+            使用帮助
+            极客导航
+            编程百科
+            w3cschool手机版
+            联系我们
+            官方QQ2群：435572245
+            官方QQ群：495864936(已满)
+            商务合作QQ：3265790599
+        </div>
+    </div>
+
+    <div id="parent">
+        <div id="div1"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>链式运动框架</title>
+    <style>
+        .btn{width:20px;height:30px;background:black;border:1px solid #ff6600;position:absolute;right:0;bottom:0;z-index: 3;}
+        .box-right{width:140px;height:30px;background:red;border:1px solid #f60;z-index:2;position:absolute;bottom:0;right:-122px;display:none;}
+        .box-top{width:140px;height:200px;background:green;border:1px solid #3cfc00;z-index: 1;position:relative;bottom:-202px;right:0;display: none;}
+        .hide{width:142px;height:200px;overflow: hidden;position: absolute;right:0;bottom:0;}
+        .close{width:10px;height:10px;background:yellow;position:absolute;top:0;right:0;}
+    </style>
+    <script src="move.js"></script>
+    <script>
+        window.onload= function () {
+            var oBtn = document.getElementById("btn");
+            var oRight = document.getElementById("right");
+            var oTop = document.getElementById("top");
+            var oClose = document.getElementById("close");
+
+            oBtn.onclick = function () {
+                oRight.style.display = "block";
+                move(oRight,"right",0,function(){
+                    oTop.style.display = "block";
+                    move(oTop,"bottom",0);
+                })
+            };
+            oClose.onclick = function () {
+                move(oTop,"bottom",-202,function(){
+                    oTop.style.display = "none";
+                    move(oRight,"right",-122, function () {
+                        oRight.style.display = "none";
+                    })
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="hide">
+        <div class="btn" id="btn">
+
+        </div>
+        <div class="box-right" id="right">
+
+        </div>
+        <div class="box-top" id="top">
+            <div class="close" id="close"></div>
+        </div>
+    </div>
+</body>
+</html>

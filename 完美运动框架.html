@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>完美运动框架</title>
+    <style>
+        div{width:100px;height:100px;background:red;position: relative;overflow: hidden;}
+        img{width:100px;height:100px;position:absolute;transform: scale(1);}
+    </style>
+    <script src="move2.js"></script>
+    <script>
+        window.onload = function () {
+            var oBtn = document.getElementById("btn1");
+            var oImg = document.getElementById("img1");
+
+            oImg.onmouseover = function () {
+                transForm(1.2);
+            };
+            oImg.onmouseout = function () {
+                transForm(1);
+            };
+            function transForm(value){
+                oImg.style.transform = "scale("+value+")";
+                oImg.style.transition = "transform 0.3s linear";
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="btn1" value="运动">
+    <div><img id="img1" src="img/guanfang1.jpg" alt="nba"></div>
+</body>
+</html>

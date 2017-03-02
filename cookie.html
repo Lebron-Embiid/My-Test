@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie</title>
+    <script>
+        //var oDate = new Date();
+        //oDate.setDate(oDate.getDate()+14);   //获取过期时间
+        //alert(oDate.getFullYear()+"-"+(oDate.getMonth()+1)+"-"+oDate.getDate());
+
+        //document.cookie = "user=blue;expires="+oDate; //设置cookie过期时间
+        //document.cookie = "pwd=123456;expires="+oDate;
+        //alert(document.cookie);
+
+        //设置cookie
+        function setCookie(name,value,iDay){
+            var oDate = new Date();
+            oDate.setDate(oDate.getDate()+iDay);
+
+            document.cookie = name+"="+value+";"+"expires="+oDate;
+
+        }
+        //获取cookie
+        function getCookie(name){
+            var arr = document.cookie.split("; ");
+            for(var i=0;i<arr.length;i++){
+                var arr2 = arr[i].split("=");
+                if(arr2[0] == name){
+                    return arr2[1];
+                }
+            }
+            return '';
+        }
+        //删除cookie
+        function removeCookie(name){
+            setCookie(name,1,-1);
+        }
+
+        /*setCookie("userName","Lebronjames",365);
+        setCookie("password","123456",14);
+        alert(document.cookie);
+        removeCookie("userName");
+        removeCookie("password");
+        alert(getCookie("userName"));*/
+        window.onload = function () {
+            var oForm = document.getElementById("form1");
+            var oUser = document.getElementById("user");
+
+            oForm.onsubmit = function () {
+                setCookie("user",oUser.value,1);
+            };
+            oUser.value = getCookie("user");
+            removeCookie("user");
+        }
+    </script>
+</head>
+<body>
+<form id="form1" action="http://www.baidu.com/">
+    帐号: <input type="text" id="user"><br>
+    密码: <input type="password"><br>
+    <input type="submit" value="登录">
+</form>
+</body>
+</html>
